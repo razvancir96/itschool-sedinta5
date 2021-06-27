@@ -1,0 +1,107 @@
+body {
+    /* Resetam proprietatile default ale browserului. */
+    margin: 0;
+
+    /* Viewport = ce vede userul din site-ul nostru. 100vh = 100% din viewport.
+    De ce folosim min-height? Poate la un moment dat conținutul site-ului nostru va fi suficient de mare si va avea scroll pe verticala. Asta insemna mai mult de 100vh.
+    Dar, de asemenea, foarte important este ca atunci cand avem prea putin conținut, footer-ul sa fie in subsolul paginii. */
+    min-height: 100vh;
+
+    /* Body-ul este alcatuit din 3 sectiuni: header, main si footer. */
+    /* display: flex permite utilizarea proprietatilor de flexbox. */
+    display: flex;
+    /* Afisam copiii directi (header, main si footer) pe coloana */
+    flex-direction: column;
+}
+
+/* flex-grow: 1 ii spune lui main: "cresti cat de mult ai loc". Daca header-ul si footer-ul nu au ocupat tot spatiul de pe verticala, mai o va face, iar astfel footer-ul va fi mereu in subsol. */
+body main {
+    flex-grow: 1;
+}
+
+/* Clasa container este folosita pentru a limita dimensiunile elementelor. Unii useri pot avea ecrane ridicol de mici, altii ridicoli de mari. Este perfect ok sa limitam continutul intre doua valori. Pentru ecranele prea mici va fi scroll orizontal, iar pentru cele mari mult spatiu stanga-dreapta. */
+.container {
+    min-width: 300px;
+    max-width: 1200px;
+    /* margin: auto imparte egal spatiul ramas in stanga si-n dreapta. */
+    margin: auto;
+}
+
+header {
+    background-color: rgb(24, 31, 76);
+    color: white;
+    padding: 12px;
+}
+
+header .container {
+    display: flex;
+    /* In container sunt doi copii: img si nav. Vrem ca unul sa fie in stanga, iar celalalt in drepata. Pentru acest tip de aliniere pe orizontala, folosim justify-content: space-between. */
+    justify-content: space-between;
+}
+
+header img {
+    /* Este important sa ii dam o latime imaginii, altfel e posibil ca flex sa o intinda pe intreg randul. */
+    width: 150px;
+}
+
+header nav {
+    display: flex;
+    /* Pentru a alinia elementele pe verticala, folosim align-items. Daca vrem sa le centram, dam valoarea center. */
+    align-items: center;
+}
+
+header nav div {
+    margin-left: 12px;
+}
+
+/* CSS-ul din interiorul acoladelor acestui media query se va aplica doar daca dimensiunea maixma a ecranului este de 600px. */
+@media (max-width: 600px) {
+    /* Proprietatile de CSS din media queries se scriu dupa cele normale, intrucat uneori este nevoie sa le suprascrie. */
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav {
+        flex-direction: column;
+    }
+
+    header nav div {
+        margin: 12px 0;
+    }
+}
+
+main {
+    padding: 12px;
+}
+
+main .courses-container {
+    display: flex;
+    /* By default, flex-wrap are valoarea nowrap, deci nu lasa elementele sa treaca pe randul urmator. Noi vrem ca in cazul in care cursurile noastre nu mai incap pe rand, sa treaca pe urmatorul, deci alegem valoare wrap. */
+    flex-wrap: wrap;
+}
+
+main .courses-container div {
+    /* Este bine ca fiecare curs sa aiba o dimensiune fixa, pentru asezarea mai buna in pagina. */
+    width: 400px;
+
+    margin-right: 40px;
+    margin-bottom: 20px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    border-bottom: solid 3px chocolate;
+}
+
+footer {
+    background-color: rgb(24, 31, 76);
+    color: white;
+}
+
+footer .container{
+    display: flex;
+    /* Space around este un alt tip de aliniere pe orizontala. */
+    justify-content: space-around;
+}
+
